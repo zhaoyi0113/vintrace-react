@@ -1,27 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import WineList from './Winelist';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-const App = ({ wineryData, search }) => {
+import WineList from './Winelist';
+import Wine from './Wine';
+import SearchBar from './SearchBar';
+
+const App = ({ wineryData }) => {
   return (
-    <div className="App">
-      <WineList wineryData={wineryData} search={search} />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/wine/:lotCode">
+          <Wine />
+        </Route>
+        <Route exact path="/">
+          <WineList wineryData={wineryData} />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     wineryData: state.wineryData,
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    search: (text) => {
-      dispatch({ type: 'search', text });
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

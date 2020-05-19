@@ -5,16 +5,14 @@ const rawData = wineryData;
 
 const winery = (state = { wineryData }, action) => {
   if (action.type === 'search') {
-    console.log('action:', action, state);
     if (!action.text) {
       return rawData;
     }
-    const filtered = state.filter(
+    return state.filter(
       (winery) =>
-        (winery.lotCode && winery.lotCode.includes(action.text)) ||
-        (winery.description && winery.description.includes(action.text)),
+        (winery.lotCode && winery.lotCode.toLowerCase().includes(action.text.toLowerCase())) ||
+        (winery.description && winery.description.toLowerCase().includes(action.text.toLowerCase())),
     );
-    return filtered;
   }
   return state;
 };
