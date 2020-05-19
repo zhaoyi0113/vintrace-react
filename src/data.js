@@ -1,4 +1,4 @@
-const wineryData = [
+export const wineryData = [
   {
     "lotCode":"11YVCHAR001",
     "volume":1000.0,
