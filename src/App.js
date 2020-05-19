@@ -5,7 +5,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import WineList from './Winelist';
 import Wine from './Wine';
 
-const App = ({ wineryData }) => {
+export const App = ({ wineryData }) => {
   return (
     <Router>
       <Switch>
