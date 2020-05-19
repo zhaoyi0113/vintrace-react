@@ -4,7 +4,6 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import WineList from './Winelist';
 import Wine from './Wine';
-import SearchBar from './SearchBar';
 
 const App = ({ wineryData }) => {
   return (

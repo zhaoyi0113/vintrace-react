@@ -16,7 +16,7 @@ export default ({ wineryData }) => {
       <SearchBar />
       <List>
         {wineryData.map((data, i) => (
-          <Link  key={`item-${i}`} to={`${match.url}wine/:${data.lotCode}`}>
+          <Link  key={`item-${i}`} to={`${match.url}wine/${data.lotCode}`}>
             <ListItem style={{ cursor: 'pointer' }}>
               <ListItemAvatar>
                 <LocalDrink />
