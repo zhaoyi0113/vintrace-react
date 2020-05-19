@@ -2,23 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import WineList from './Winelist';
 
-const App = ({ wineryData }) => {
+const App = ({ wineryData, search }) => {
   return (
     <div className="App">
-      <WineList wineryData={wineryData} />
+      <WineList wineryData={wineryData} search={search} />
     </div>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, props) => {
   return {
     wineryData: state.wineryData,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    onClick: () => {},
+    search: (text) => {
+      dispatch({ type: 'search', text });
+    },
   };
 };
 

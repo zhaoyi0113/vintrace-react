@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -50,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -58,21 +58,9 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
 }));
 
-export default function SearchAppBar() {
+const SearchAppBar = ({ search }) => {
   const classes = useStyles();
 
   return (
@@ -101,10 +89,29 @@ export default function SearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(event) => {
+                search(event.target.value);
+              }}
             />
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state, props) => {
+  return {
+    wineryData: state.wineryData,
+  };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    search: (text) => {
+      dispatch({ type: 'search', text });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchAppBar);

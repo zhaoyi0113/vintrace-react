@@ -1,12 +1,24 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import { wineryData } from './data';
 
-const winery = (state, action) => {
-  if (typeof state === 'undefined') {
-    state = 0 // If state is undefined, initialize it with a default value
+const rawData = wineryData;
+
+const winery = (state = { wineryData }, action) => {
+  if (action.type === 'search') {
+    console.log('action:', action, state);
+    if (!action.text) {
+      return rawData;
+    }
+    const filtered = state.filter(
+      (winery) =>
+        (winery.lotCode && winery.lotCode.includes(action.text)) ||
+        (winery.description && winery.description.includes(action.text)),
+    );
+    return filtered;
   }
   return state;
-}
+};
 
 export const rootReducer = combineReducers({
-  wineryData: winery
+  wineryData: winery,
 });
